@@ -11,8 +11,9 @@ export default function ContactUs() {
     name: "",
     email: "",
     message: "",
-  })
-  const ref = useRef(null)
+  });
+  const ref = useRef(null);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,11 +37,31 @@ export default function ContactUs() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    setFormData({ name: "", email: "", message: "" })
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    setStatus("Submitting...");
+
+    try {
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("✅ Submitted successfully!");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus("❌ Error: " + data.error);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setStatus("❌ Something went wrong.");
+    }
+  };
 
   return (
     <section ref={ref} id="contact" className="py-16 sm:py-24 bg-background">
@@ -157,6 +178,13 @@ export default function ContactUs() {
               Send Message
             </button>
           </form>
+          <p  className={`space-y-6 transition-all duration-1000 delay-200 ${
+              isVisible ? "slide-up" : "opacity-0 translate-y-10"
+            }`}></p>
+
+          {status && <p  className={`space-y-6 transition-all duration-1000 delay-200 ${
+              isVisible ? "slide-up" : "opacity-0 translate-y-10"
+            }`}>{status}</p>}
         </div>
       </div>
     </section>
