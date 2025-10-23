@@ -25,7 +25,7 @@ export default function OurTeamExperts() {
   }, [])
 
   return (
-    <section ref={ref} className="py-16 sm:py-24 bg-background">
+    <section id="our-team-experts" ref={ref} className="py-16 sm:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-foreground mb-16 text-balance">
           Our team of experts

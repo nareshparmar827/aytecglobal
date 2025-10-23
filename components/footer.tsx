@@ -27,8 +27,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#what-we-offer" className="hover:text-accent transition-colors">
-                  What We Offer
+                <Link href="#our-team-experts" className="hover:text-accent transition-colors">
+                  Our Team Experts
                 </Link>
               </li>
               <li>

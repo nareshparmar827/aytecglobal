@@ -13,7 +13,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "What We Offer", href: "#what-we-offer" },
+    { label: "Our Team Experts", href: "#our-team-experts" },
     { label: "Register Trade Account", href: "/register" },
     { label: "Contact", href: "#contact" },
   ]
